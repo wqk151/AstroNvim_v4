@@ -4,15 +4,15 @@
 
 -- Set up custom filetypes
 vim.filetype.add {
-    extension = {
-        foo = "fooscript",
-    },
-    filename = {
-        ["Foofile"] = "fooscript",
-    },
-    pattern = {
-        ["~/%.config/foo/.*"] = "fooscript",
-    },
+  extension = {
+    foo = "fooscript",
+  },
+  filename = {
+    ["Foofile"] = "fooscript",
+  },
+  pattern = {
+    ["~/%.config/foo/.*"] = "fooscript",
+  },
 }
 -- https://github.com/RayJameson/astronvim_config/blob/main/polish.lua
 -- https://blog.csdn.net/weixin_44609676/article/details/129991902
