@@ -88,6 +88,9 @@ return {
         ["<leader>tu"] = false,
         ["<leader>tt"] = false,
         ["<leader>tp"] = false,
+        ["grr"] = false,
+        ["gra"] = false,
+        ["grn"] = false,
         -- ["<leader>n"] = false,
         -- Go to home and end using capitalized directions
         ["H"] = { "^" },

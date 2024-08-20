@@ -139,6 +139,14 @@ return {
           desc = "Declaration of current symbol",
           cond = "textDocument/declaration",
         },
+        ["gr"] = {
+          function() require("telescope.builtin").lsp_references() end,
+          desc = "References of current symbol",
+        },
+        ["<Leader>lR"] = {
+          function() require("telescope.builtin").lsp_references() end,
+          desc = "References of current symbol",
+        },
         ["<Leader>uY"] = {
           function() require("astrolsp.toggles").buffer_semantic_tokens() end,
           desc = "Toggle LSP semantic highlight (buffer)",
