@@ -21,7 +21,7 @@ return {
       },
       exclude_dirs = { "build/*", "cmake_build/*" },
       silent_chdir = true,
-      manual_mode = true,
+      manual_mode = false,
       scope_chdir = "tab",
     }
   end,

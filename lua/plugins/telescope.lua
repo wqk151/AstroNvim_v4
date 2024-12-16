@@ -14,7 +14,28 @@ return {
     -- },
   },
   opts = function(_, opts)
+    local actions = require "telescope.actions"
     return require("astrocore").extend_tbl(opts, {
+      defaults = {
+        -- Default configuration for telescope goes here:
+        -- config_key = value,
+        mappings = {
+          i = {
+            -- map actions.which_key to <C-h> (default: <C-/>)
+            -- actions.which_key shows the mappings for your picker,
+            -- e.g. git_{create, delete, ...}_branch for the git_branches picker
+            ["<C-j>"] = actions.move_selection_next,
+            ["<Tab>"] = actions.move_selection_next,
+            ["<C-k>"] = actions.move_selection_previous,
+            ["<S-Tab>"] = actions.move_selection_previous,
+            ["<CR>"] = actions.select_default + actions.center,
+            ["<Esc>"] = actions.close,
+            ["<C-h>"] = "which_key",
+            ["<C-p>"] = actions.cycle_history_prev,
+            ["<C-n>"] = actions.cycle_history_next,
+          },
+        },
+      },
       pickers = {
         find_files = {
           hidden = true,
@@ -106,7 +127,7 @@ return {
   end,
   config = function(_, opts)
     -- run the core AstroNvim configuration function with the options table
-    -- require("configs").telescope_drop(_, opts)
+    require("configs").telescope_drop(_, opts)
 
     -- require telescope and load extensions as necessary
     local telescope = require "telescope"

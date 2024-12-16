@@ -28,7 +28,7 @@ git clone https://github.com/<your_user>/<your_repository> ~/.config/nvim
 - neovim: v0.10.1
 - node: v18.15.0
 - python3: 3.10
-- golang: go1.18.1
+- golang: go1.22
 
 ## Dependencies
 
