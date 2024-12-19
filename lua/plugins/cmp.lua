@@ -44,11 +44,11 @@ return {
         },
       },
       sources = cmp.config.sources {
-        { name = "nvim_lsp",               priority = 1000, keyword_length = 1 },
-        { name = "codeium",                priority = 900,  keyword_length = 2 },
-        { name = "luasnip",                priority = 750,  keyword_length = 2 },
-        { name = "buffer",                 priority = 300,  keyword_length = 2 },
-        { name = "path",                   priority = 250 },
+        { name = "nvim_lsp", priority = 1000, keyword_length = 1 },
+        { name = "codeium", priority = 900, keyword_length = 2 },
+        { name = "luasnip", priority = 750, keyword_length = 2 },
+        { name = "buffer", priority = 300, keyword_length = 2 },
+        { name = "path", priority = 250 },
         { name = "nvim_lsp_signature_help" },
       },
       formatting = {

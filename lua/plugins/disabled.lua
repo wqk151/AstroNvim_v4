@@ -23,6 +23,7 @@ return {
   -- { "folke/flash.nvim", enabled = false },
   -- { "stevearc/aerial.nvim", enabled = false },
   { "AstroNvim/astrotheme", enabled = false },
+  -- { "Thiago4532/mdmath.nvim", enabled = false },
   { "Mr-LLLLL/interestingwords.nvim", enabled = false },
   -- { "lewis6991/gitsigns.nvim", enabled = false },
   -- { "folke/trouble.nvim", enabled = false },
