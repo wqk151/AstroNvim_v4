@@ -124,7 +124,7 @@ return {
           "<cmd>Telekasten rename_note<CR>",
           desc = "Rename current note and update the links pointing to it",
         },
-        ["<leader>zd"] = { "<cmd>Telekasten goto_today<CR>", desc = "Open today's daily note" },
+        ["<leader>zd"] = { "<cmd>Telekasten toggle_todo<CR>", desc = "Toggle todo status of a line" },
         ["<leader>zz"] = { "<cmd>Telekasten follow_link<CR>", desc = "Follow the link under the cursor" },
         ["<leader>zn"] = { "<cmd>Telekasten new_note<CR>", desc = "Create a new note, prompts for title" },
         ["<leader>zc"] = { "<cmd>Telekasten show_calendar<CR>", desc = "Show the calendar" },
@@ -177,10 +177,13 @@ return {
 
         -- Trouble
         ["<leader>x"] = sections.x,
-        ["<leader>xx"] = { "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Document Diagnostics (Trouble)" },
-        ["<leader>xX"] = { "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace Diagnostics (Trouble)" },
-        ["<leader>xl"] = { "<cmd>TroubleToggle loclist<cr>", desc = "Location List (Trouble)" },
-        ["<leader>xq"] = { "<cmd>TroubleToggle quickfix<cr>", desc = "Quickfix List (Trouble)" },
+        ["<leader>xx"] = { "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (Trouble)" },
+        ["<leader>xX"] = {
+          "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+          desc = "Buffer Diagnostics (Trouble)",
+        },
+        ["<leader>xl"] = { "<cmd>Trouble loclist toggle<cr>", desc = "Location List (Trouble)" },
+        ["<leader>xq"] = { "<cmd>Trouble qflist toggle<cr>", desc = "Quickfix List (Trouble)" },
         ["<leader>xT"] = { "<cmd>TodoTrouble<cr>", desc = "TODOs (Trouble)" },
 
         -- terminal

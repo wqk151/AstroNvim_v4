@@ -53,7 +53,6 @@ return {
         filetypes = { "c", "cpp", "cuda", "objc", "objcpp", "opencl" },
         init_options = {
           clangdFileStatus = true, -- Provides information about activity on clangd’s per-file worker thread
-          -- TODO: figure out what is this
           usePlaceholders = true,
           completeUnimported = true,
           semanticHighlighting = true,
@@ -138,6 +137,18 @@ return {
           function() vim.lsp.buf.declaration() end,
           desc = "Declaration of current symbol",
           cond = "textDocument/declaration",
+        },
+        ["gy"] = {
+          function() require("telescope.builtin").lsp_type_definitions() end,
+          desc = "Definition of current type",
+        },
+        ["gd"] = {
+          function() require("telescope.builtin").lsp_definitions() end,
+          desc = "Show the definition of current symbol",
+        },
+        ["gI"] = {
+          function() require("telescope.builtin").lsp_implementations() end,
+          desc = "Implementation of current symbol",
         },
         ["gr"] = {
           function() require("telescope.builtin").lsp_references() end,
