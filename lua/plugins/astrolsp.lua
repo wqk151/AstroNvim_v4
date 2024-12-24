@@ -165,6 +165,8 @@ return {
             return client.supports_method "textDocument/semanticTokens/full" and vim.lsp.semantic_tokens ~= nil
           end,
         },
+        -- gitsigns
+        ["<Leader>gp"] = { function() require("gitsigns").preview_hunk() end, desc = "Preview Git hunk" },
       },
     },
     -- A custom `on_attach` function to be run after the default `on_attach` function
