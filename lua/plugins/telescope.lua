@@ -12,6 +12,10 @@ return {
     --   dependencies = { "nvim-lua/popup.nvim" },
     --   after = "telescope.nvim",
     -- },
+    {
+      "nvim-telescope/telescope-live-grep-args.nvim",
+      after = "telescope.nvim",
+    },
   },
   opts = function(_, opts)
     local actions = require "telescope.actions"
@@ -134,6 +138,7 @@ return {
 
     telescope.load_extension "projects"
     telescope.load_extension "goimpl"
+    telescope.load_extension "live_grep_args"
     -- telescope.load_extension "media_files"
   end,
 }

@@ -4,7 +4,7 @@
 -- render local images, can not use quotation marks and `./`,eg: ![test](test.png)
 return {
   "3rd/image.nvim",
-  branch = "feat/toggle-rendering",
+  -- branch = "feat/toggle-rendering",
   dependencies = {
     "leafo/magick",
     "nvim-treesitter/nvim-treesitter",

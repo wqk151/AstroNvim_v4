@@ -111,8 +111,6 @@ return {
 
         ["<leader>p"] = { '"+p', desc = "paste from register" },
 
-        ["gs"] = { "<cmd>lua vim.lsp.buf.signature_help()<cr>", desc = "show signature help" },
-
         -- Hop
         ["<leader>jl"] = { "<cmd>HopLine<cr>", desc = "Line" },
         ["<leader>jw"] = { "<cmd>HopWord<cr>", desc = "Word" },
@@ -155,9 +153,25 @@ return {
         ["<leader>mm"] = { "<cmd>RenderMarkdown toggle<cr>", desc = "Toggle markdown render" },
         ["<leader>mo"] = { "<cmd>MarkmapOpen<cr>", desc = "Open markmap" },
         ["<leader>mw"] = { "<cmd>MarkmapWatch<cr>", desc = "Open markmap and watch for changes" },
-        ["<leader>mc"] = { function() require("image").disable() end, desc = "Disable render image" },
-        ["<leader>mi"] = { function() require("image").enable() end, desc = "Render image" },
-
+        ["<leader>mr"] = {
+          function()
+            local api = require "image"
+            local bufnr = vim.api.nvim_get_current_buf()
+            local images = api.get_images { buffer = bufnr }
+            if vim.b.image_render_disabled then
+              vim.b.image_render_disabled = false
+              for _, image in ipairs(images) do
+                image:render()
+              end
+            else
+              vim.b.image_render_disabled = true
+              for _, image in ipairs(images) do
+                image:clear(true)
+              end
+            end
+          end,
+          desc = "Toggle Render image",
+        },
         -- todo-comments
         ["<leader>fT"] = { "<cmd>TodoTelescope<cr>", desc = "Find TODOs in wrokspace" },
 
