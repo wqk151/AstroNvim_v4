@@ -136,7 +136,7 @@ return {
     -- require telescope and load extensions as necessary
     local telescope = require "telescope"
 
-    telescope.load_extension "projects"
+    -- telescope.load_extension "projects"
     telescope.load_extension "goimpl"
     telescope.load_extension "live_grep_args"
     -- telescope.load_extension "media_files"

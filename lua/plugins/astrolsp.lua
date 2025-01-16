@@ -40,6 +40,7 @@ return {
     -- enable servers that you already have installed without mason
     servers = {
       -- "pyright"
+      "tabby_ml",
     },
     -- customize language server configuration options passed to `lspconfig`
     ---@diagnostic disable: missing-fields
@@ -56,6 +57,12 @@ return {
           usePlaceholders = true,
           completeUnimported = true,
           semanticHighlighting = true,
+        },
+      },
+      tabby_ml = {
+        settings = {
+          cmd = { "tabby-agent", "--lsp", "--stdio" },
+          single_file_support = true,
         },
       },
       harper_ls = {
@@ -126,7 +133,7 @@ return {
     -- customize how language servers are attached
     handlers = {
       -- a function without a key is simply the default handler, functions take two parameters, the server name and the configured options table for that server
-      -- function(server, opts) require("lspconfig")[server].setup(opts) end
+      -- function(server, opts) require("lspconfig")[server].setup(opts) end,
 
       -- the key is the server that is being setup with `lspconfig`
       -- rust_analyzer = false, -- setting a handler to false will disable the set up of that language server
