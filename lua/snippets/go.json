@@ -1,0 +1,34 @@
+{
+  "go": [
+    {
+      "trigger": "todo",
+      "name": "add TODO comment",
+      "description": "add TODO comment",
+      "body": ["// TODO: $0"]
+    },
+    {
+      "trigger": "note",
+      "name": "add NOTE comment",
+      "description": "add NOTE comment",
+      "body": ["// NOTE: $0"]
+    },
+    {
+      "trigger": "pmain",
+      "name": "init package main",
+      "description": "Initialize a new main package with a main func",
+      "body": ["package main", "", "func main() {", "\t$0", "}"]
+    },
+    {
+      "trigger": "iferr",
+      "name": "if error",
+      "description": "if statement to handle err",
+      "body": ["if err != nil {", "\t$0", "}"]
+    },
+    {
+      "trigger": "iferrp",
+      "name": "if error panic",
+      "description": "if statement to panic an error",
+      "body": ["if err != nil {", "\tpanic(err)", "}"]
+    }
+  ]
+}

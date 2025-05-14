@@ -4,10 +4,8 @@
 -- Configuration documentation can be found with `:h astrocore`
 -- NOTE: We highly recommend setting up the Lua Language Server (`:LspInstall lua_ls`)
 --       as this provides autocomplete and documentation while editing
-local configs = require "configs"
 local sections = {
   z = { desc = " Zettelkasten" },
-  x = { desc = " Trouble" },
   m = { desc = " Markdown" },
   n = { desc = "󰞋 Noegen" },
   r = { desc = " Run" },
@@ -82,16 +80,15 @@ return {
         -- setting a mapping to false will disable it
         -- ["<C-S>"] = false,
         -- disable Terminal bindings
-        ["<leader>gg"] = false,
-        ["<leader>tl"] = false,
-        ["<leader>tn"] = false,
-        ["<leader>tu"] = false,
-        ["<leader>tt"] = false,
-        ["<leader>tp"] = false,
         ["grr"] = false,
         ["gra"] = false,
         ["grn"] = false,
-        -- ["<leader>n"] = false,
+        ["gri"] = false,
+        ["<Leader>n"] = false,
+        ["<Leader>tn"] = false,
+        ["<Leader>tp"] = false,
+        ["<Leader>tt"] = false,
+        ["<Leader>tl"] = false,
         -- Go to home and end using capitalized directions
         ["H"] = { "^" },
         ["L"] = { "$" },
@@ -114,6 +111,7 @@ return {
         -- Hop
         ["<leader>jl"] = { "<cmd>HopLine<cr>", desc = "Line" },
         ["<leader>jw"] = { "<cmd>HopWord<cr>", desc = "Word" },
+        ["<leader>jf"] = { function() Snacks.picker.jumps() end, desc = "Jumps" },
         -- telekasten.nvim
         ["<leader>z"] = sections.z,
         ["<leader>zf"] = { "<cmd>Telekasten find_notes<CR>", desc = "Find notes by title (filename)" },
@@ -143,43 +141,22 @@ return {
         ["<leader>rb"] = { "<cmd>MdEval<cr>", desc = "Run C++ Code block in Markdown" },
 
         -- translate
-        [",t"] = { "<cmd>TranslateW<cr>", desc = "Translate word" },
-
-        -- multicursors
-        ["<leader>ss"] = { "<cmd>MCstart<cr>", desc = "select text under the cursor" },
+        -- [",t"] = { "<cmd>TranslateW<cr>", desc = "Translate word" },
+        [",t"] = { "<cmd>TranslateNormal<cr>", desc = "Translate word" },
 
         -- view markdown
         ["<leader>m"] = sections.m,
         ["<leader>mm"] = { "<cmd>RenderMarkdown toggle<cr>", desc = "Toggle markdown render" },
         ["<leader>mo"] = { "<cmd>MarkmapOpen<cr>", desc = "Open markmap" },
         ["<leader>mw"] = { "<cmd>MarkmapWatch<cr>", desc = "Open markmap and watch for changes" },
-        ["<leader>mr"] = {
-          function()
-            local api = require "image"
-            local bufnr = vim.api.nvim_get_current_buf()
-            local images = api.get_images { buffer = bufnr }
-            if vim.b.image_render_disabled then
-              vim.b.image_render_disabled = false
-              for _, image in ipairs(images) do
-                image:render()
-              end
-            else
-              vim.b.image_render_disabled = true
-              for _, image in ipairs(images) do
-                image:clear(true)
-              end
-            end
-          end,
-          desc = "Toggle Render image",
-        },
         -- todo-comments
-        ["<leader>fT"] = { "<cmd>TodoTelescope<cr>", desc = "Find TODOs in wrokspace" },
-
-        -- projects
-        ["<leader>fp"] = { "<cmd>Telescope projects<cr>", desc = "Search projects" },
+        ["<leader>fT"] = {
+          function() require("snacks").picker.todo_comments { keywords = { "TODO", "FIX", "FIXME" } } end,
+          desc = "Todo/Fix/Fixme",
+        },
 
         -- remap <leader>ll to Search symbols
-        ["<leader>ll"] = { function() require("telescope.builtin").lsp_document_symbols() end, desc = "Search symbols" },
+        -- ["<leader>ll"] = { function() require("telescope.builtin").lsp_document_symbols() end, desc = "Search symbols" },
 
         -- goimpl
         ["<leader>fi"] = { "<cmd>Telescope goimpl<CR>", desc = "Search GoImpl" },
@@ -190,25 +167,25 @@ return {
         ["<Leader>nc"] = { "<cmd>Neogen class<CR>", desc = "Autodocstring class" },
 
         -- Trouble
-        ["<leader>x"] = sections.x,
+        -- ["<leader>x"] = sections.x,
         ["<leader>xx"] = { "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (Trouble)" },
         ["<leader>xX"] = {
           "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
           desc = "Buffer Diagnostics (Trouble)",
         },
         ["<leader>xl"] = { "<cmd>Trouble loclist toggle<cr>", desc = "Location List (Trouble)" },
-        ["<leader>xq"] = { "<cmd>Trouble qflist toggle<cr>", desc = "Quickfix List (Trouble)" },
+        -- ["<leader>xq"] = { "<cmd>Trouble qflist toggle<cr>", desc = "Quickfix List (Trouble)" },
         ["<leader>xT"] = { "<cmd>TodoTrouble<cr>", desc = "TODOs (Trouble)" },
 
         -- terminal
         ["<leader>ti"] = {
-          function() configs.toggle_term_cmd "ipython" end,
+          function() require("snacks").terminal.toggle "ipython" end,
           desc = "ToggleTerm ipython",
         },
-        ["<leader>tj"] = {
-          function() configs.toggle_term_cmd "joshuto" end,
-          desc = "ToggleTerm ipython",
-        },
+        -- ["<leader>tj"] = {
+        --   function() configs.toggle_term_cmd "joshuto" end,
+        --   desc = "ToggleTerm ipython",
+        -- },
       },
       v = {
         -- Reselect text after indent/unindent.
@@ -216,9 +193,11 @@ return {
         ["<"] = { "<gv" },
         [">"] = { ">gv" },
         ["<leader>y"] = { '"+y', desc = "copy to register" },
-
-        -- translate
-        ["<leader>ss"] = { "<cmd>MCstart<cr>", desc = "select text under the cursor" },
+        [",t"] = { "<cmd>TranslateVisual<cr>", desc = "Translate selected text" },
+        -- fittencode
+        ["<leader>ad"] = { "<cmd>Fitten document_code<CR>", desc = "Fitten document code" },
+        ["<leader>ae"] = { "<cmd>Fitten edit_code<CR>", desc = "Fitten edit code" },
+        ["<leader>af"] = { "<cmd>Fitten find_bugs<CR>", desc = "Fitten find bugs" },
       },
       i = {
         -- 编辑完成后跳出括号

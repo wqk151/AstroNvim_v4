@@ -1,4 +1,4 @@
-# AstroNvim config v4+
+# AstroNvim config v5
 
 ## AstroNvim repository
 
@@ -20,7 +20,7 @@ mv ~/.cache/nvim ~/.cache/nvim.bak
 #### Clone the repository
 
 ```bash
-git clone https://github.com/<your_user>/<your_repository> ~/.config/nvim
+git clone https://github.com/wqk151/AstroNvim_v4.git ~/.config/nvim
 ```
 
 ## Environment
@@ -54,27 +54,9 @@ nvim --version
 curl -LO https://github.com/BurntSushi/ripgrep/releases/download/13.0.0/ripgrep_13.0.0_amd64.deb
 sudo dpkg -i ripgrep_13.0.0_amd64.deb
 
-# lazygit(optional)
-LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
-curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
-tar xf lazygit.tar.gz lazygit
-sudo install lazygit /usr/local/bin
-
-# gdu(optional)
-sudo add-apt-repository ppa:daniel-milde/gdu
-apt-get update
-apt-get install gdu
-
-# btm(optional)
-curl -LO https://github.com/ClementTsang/bottom/releases/download/0.8.0/bottom_0.8.0_amd64.deb
-sudo dpkg -i bottom_0.8.0_amd64.deb
-
 # fzf
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
-
-# glow
-go install github.com/charmbracelet/glow@latest
 
 # chafa(optional)
 https://hpjansson.org/chafa/releases/static/chafa-1.12.4-1-x86_64-linux-gnu.tar.gz
@@ -85,14 +67,7 @@ apt install poppler-utils
 # ffmpeg
 apt install ffmpeg
 
-# rich
-pip install rich-cli
-
 # nerd fonts
-
-# joshuto
-cargo install --git https://github.com/kamiyaa/joshuto.git --force
-
 ```
 
 ## Mappings
@@ -113,7 +88,6 @@ cargo install --git https://github.com/kamiyaa/joshuto.git --force
 | Right Window                                   | Ctrl + l     |
 | Force Write                                    | Ctrl + s     |
 | Force Quit                                     | Ctrl + q     |
-| New File                                       | Leader + n   |
 | Close Buffer                                   | Leader + c   |
 | Next Tab (real vim tab)                        | ]t           |
 | Previous Tab (real vim tab)                    | [t           |
@@ -122,8 +96,6 @@ cargo install --git https://github.com/kamiyaa/joshuto.git --force
 | Vertical Split                                 | `\|`         |
 | Open the link under cursor with system browser | gx           |
 | Translate Word                                 | `,+t`        |
-| Search backwards                               | f            |
-| Search and Select                              | gnn          |
 
 ### Buffers
 
@@ -153,11 +125,32 @@ cargo install --git https://github.com/kamiyaa/joshuto.git --force
 | First table                                                         | Leader + bth   |
 | Last table                                                          | Leader + btl   |
 
+### Commenting Mappings
+
+| Action         | Mappings     |
+| -------------- | ------------ |
+| Toggle Comment | `Leader + /` |
+
+### List Management
+
+| Action                    | Mappings    |
+| ------------------------- | ----------- |
+| Open Quickfix List        | Leader + xq |
+| Next Quickfix Entry       | ]q          |
+| Previous Quickfix Entry   | [q          |
+| Last Quickfix Entry       | ]Q          |
+| First Quickfix Entry      | [Q          |
+| Open Local List           | Leader + xl |
+| Next Local List Entry     | ]l          |
+| Previous Local List Entry | [l          |
+| Last Local List Entry     | ]L          |
+| First Local List Entry    | [L          |
+
 ### Better Escape
 
 | Action     | Mappings |
 | ---------- | -------- |
-| Escape key | jj, kj   |
+| Escape key | kj       |
 
 ### Neo-Tree
 
@@ -179,48 +172,36 @@ cargo install --git https://github.com/kamiyaa/joshuto.git --force
 | Save Session                   | Leader + Ss   |
 | Last Session                   | Leader + Sl   |
 | Delete Session                 | Leader + Sd   |
+| Delete Directory Session       | Leader + SD   |
 | Search Sessions                | Leader + Sf   |
+| Search Directory Sessions      | Leader + SF   |
 | Load Current Directory Session | `Leader + S.` |
-
-### Package Management Mappings
-
-| Action                    | Mappings    |
-| ------------------------- | ----------- |
-| AstroNvim Packages Update | Leader + pa |
-| AstroNvim Updater         | Leader + pA |
-| AstroNvim Changelog       | Leader + pl |
-| AstroNvim Version         | Leader + pv |
-| Mason Installer           | Leader + pm |
-| Mason Updater             | Leader + pM |
-| Plugins Install           | Leader + pi |
-| Plugins Status            | Leader + ps |
-| Plugins Sync              | Leader + pS |
-| Plugins Check for Updates | Leader + pu |
-| Plugins Update            | Leader + pU |
 
 ### LSP Mappings
 
-| Action               | Mappings        | note          |
-| -------------------- | --------------- | ------------- |
-| LSP Info             | Leader + li     |               |
-| Null-ls Info         | Leader + lI     |               |
-| Hover Document       | Shift + k       |               |
-| Format Document      | Leader + lf     |               |
-| Symbols Outline      | Leader + lS     |               |
-| Line Diagnostics     | gl, Leader + ld |               |
-| All Diagnostics      | Leader + lD     |               |
-| Code Actions         | Leader + la     |               |
-| Signature Help       | Leader + lh     |               |
-| Rename               | Leader + lr     |               |
-| Document Symbols     | Leader + ls     | Leader + ll   |
-| Workspace Symbols    | Leader + lG     |               |
-| Diagnostic Next      | ]d              |               |
-| Diagnostics Previous | [d              |               |
-| Declaration          | gD              |               |
-| Type Definition      | gy              |               |
-| Definition           | gd              |               |
-| Implementation       | gI              | go 接口的实现 |
-| References           | gr, Leader + lR |               |
+| Action                   | Mappings         |
+| ------------------------ | ---------------- |
+| Hover Document           | K                |
+| Format Document          | Leader + lf      |
+| Symbols Outline          | Leader + lS      |
+| Line Diagnostics         | gl, Leader + ld  |
+| All Diagnostics          | Leader + lD      |
+| Code Actions             | gra, Leader + la |
+| Source Code Actions      | Leader + lA      |
+| Signature Help           | gK, Leader + lh  |
+| Rename                   | Leader + lr      |
+| Document Symbols         | Leader + ls      |
+| Workspace Symbols        | Leader + lG      |
+| Diagnostic Next          | ]d               |
+| Diagnostics Previous     | [d               |
+| Document Symbol Next     | ]y               |
+| Document Symbol Previous | [y               |
+| Document Symbol          | gO               |
+| Declaration              | gD               |
+| Type Definition          | gy               |
+| Definition               | gd               |
+| Implementation           | gri              |
+| References               | grr, Leader + lR |
 
 > `<C-u>` and `<C-d>` can not scrolling the hover document, press `K` twice to put your cursor in the help window and then you can scroll
 
@@ -245,52 +226,45 @@ cargo install --git https://github.com/kamiyaa/joshuto.git --force
 | Toggle Debugger UI      | `Leader + du`            |
 | Debugger Hover          | `Leader + dh`            |
 
-### Telescope Mappings
+### Packer Mappings
 
-| Action                            | Mappings         |
-| --------------------------------- | ---------------- |
-| Marks                             | `Leader + f'`    |
-| Find Words in current buffer      | `Leader + f/`    |
-| Resume previous search            | `Leader + f<CR>` |
-| Find ArstroNvim config files      | Leader + fa      |
-| Buffers                           | Leader + fb      |
-| Word at cursor                    | Leader + fc      |
-| Commands                          | Leader + fC      |
-| Find files                        | Leader + ff      |
-| Find files (include hidden files) | Leader + fF      |
-| Help Tags                         | Leader + fh      |
-| Keymaps                           | Leader + fk      |
-| Man Pages                         | Leader + fm      |
-| Notifications                     | Leader + fn      |
-| Old Files                         | Leader + fo      |
-| Registers                         | Leader + fr      |
-| Colorschemes                      | Leader + ft      |
-| Live Grep                         | Leader + fw      |
-| Live Grep (include hidden files)  | Leader + fW      |
-| LSP Symbols                       | Leader + ls      |
-| LSP Workspace Symbols             | Leader + lG      |
-| LSP References                    | Leader + lR      |
-| LSP Diagnostics                   | Leader + lD      |
-| Open TODOs in Telescope           | Leader + fT      |
-| ~~Find Medias~~                   | Leader + fM      |
-| Search Projects                   | Leader + fp      |
-| Search GoImpl                     | Leader + fi      |
+| Action                                   | Mappings         |
+| ---------------------------------------- | ---------------- |
+| Marks                                    | `Leader + f'`    |
+| Find Words in current buffer             | `Leader + f/`    |
+| Resume previous search                   | `Leader + f<CR>` |
+| Find ArstroNvim config files             | Leader + fa      |
+| Buffers                                  | Leader + fb      |
+| Word at cursor                           | Leader + fc      |
+| Find word under cursor in current buffer | Leader + fC      |
+| Find files                               | Leader + ff      |
+| Find files (include hidden files)        | Leader + fF      |
+| Help Tags                                | Leader + fh      |
+| Keymaps                                  | Leader + fk      |
+| Man Pages                                | Leader + fm      |
+| Notifications                            | Leader + fn      |
+| Old Files                                | Leader + fo      |
+| Registers                                | Leader + fr      |
+| Colorschemes                             | Leader + ft      |
+| Live Grep                                | Leader + fw      |
+| Live Grep (include hidden files)         | Leader + fW      |
+| LSP Symbols                              | Leader + ls      |
+| LSP Workspace Symbols                    | Leader + lG      |
+| LSP References                           | Leader + lR      |
+| LSP Diagnostics                          | Leader + lD      |
+| Open TODOs in Telescope                  | Leader + fT      |
+| Search Projects                          | Leader + fp      |
+| Search GoImpl                            | Leader + fi      |
 
 ### Toggle Terminal Mappings
 
-| Action                    | Mappings                 | Status   |
-| ------------------------- | ------------------------ | -------- |
-| Toggle Terminal           | F7                       |          |
-| Floating Terminal         | Leader + tf              |          |
-| Horizontal Split Terminal | Leader + th              |          |
-| Vertical Split Terminal   | Leader + tv              |          |
-| ipython                   | Leader + ti              |          |
-| joshuto                   | Leader + tj              |          |
-| LazyGit                   | Leader + tl, Leader + gg | disabled |
-| Node                      | Leader + tn              | disabled |
-| Python                    | Leader + tp              | disabled |
-| GDU                       | Leader + tu              | disabled |
-| Btm                       | Leader + tt              | disabled |
+| Action                    | Mappings    | Status |
+| ------------------------- | ----------- | ------ |
+| Toggle Terminal           | F7          |        |
+| Floating Terminal         | Leader + tf |        |
+| Horizontal Split Terminal | Leader + th |        |
+| Vertical Split Terminal   | Leader + tv |        |
+| ipython                   | Leader + ti |        |
 
 ### Git Mappings
 
@@ -298,6 +272,7 @@ cargo install --git https://github.com/kamiyaa/joshuto.git --force
 | -------------------------- | ----------- |
 | Next Hunk                  | `]g`        |
 | Previous Hunk              | `[g`        |
+| Git tracked files          | Leader + fg |
 | Blame Line                 | Leader + gl |
 | Preview Hunk               | Leader + gp |
 | Reset Hunk                 | Leader + gr |
@@ -308,35 +283,9 @@ cargo install --git https://github.com/kamiyaa/joshuto.git --force
 | Git Branches               | Leader + gb |
 | Git Commits (repository)   | Leader + gc |
 | Git Commits (current file) | Leader + gC |
+| Git browse (open)          | Leader + g  |
 | Git Status                 | Leader + gt |
-
-### UI Mappings
-
-| Action                           | Mappings    |
-| -------------------------------- | ----------- |
-| Toggle autopairs                 | Leader + ua |
-| Toggle background                | Leader + ub |
-| Toggle autocompletion            | Leader + uc |
-| Toggle color highlights          | Leader + uC |
-| Toggle diagnostics               | Leader + ud |
-| Toggle buffer auto formatting    | Leader + uf |
-| Toggle global auto formatting    | Leader + uF |
-| Toggle signcolumn                | Leader + ug |
-| Toggle foldcolumn                | Leader + uh |
-| Toggle LSP inlay hints           | Leader + uH |
-| Change indent setting            | Leader + ui |
-| Toggle statusline                | Leader + ul |
-| Toggle CodeLens                  | Leader + uL |
-| Change line numbering            | Leader + un |
-| Toggle UI notifications          | Leader + uN |
-| Toggle paste mode                | Leader + up |
-| Toggle spellcheck                | Leader + us |
-| Toggle conceal                   | Leader + uS |
-| Toggle tabline                   | Leader + ut |
-| Toggle URL highlighting          | Leader + uu |
-| Toggle wrap                      | Leader + uw |
-| Toggle syntax highlighting       | Leader + uy |
-| Toggle LSP semantic highlighting | Leader + uY |
+| Git Stash                  | Leader + gT |
 
 ### Telekasten
 
@@ -395,17 +344,6 @@ chagen: cs
    - color key: <Leader + k>
 5. hop `<Leader + jw>` support chinese characters
 
-### Projects
-
-| Normal mode | Insert mode | Action                   |
-| ----------- | ----------- | ------------------------ |
-| f           | `<c-f>`     | find_project_files       |
-| b           | `<c-b>`     | browse_project_files     |
-| d           | `<c-d>`     | delete_project           |
-| s           | `<c-s>`     | search_in_project_files  |
-| r           | `<c-r>`     | recent_project_files     |
-| w           | `<c-w>`     | change_working_directory |
-
 ### Go Command
 
 | Action                                | Command                                                  |
@@ -428,24 +366,18 @@ chagen: cs
 
 ## LSP Install List
 
-| Language   | LSP                    | Debug    | Format                    |
-| ---------- | ---------------------- | -------- | ------------------------- |
-| python     | pyright                | debugpy  | isort,black,(`ruff_lsp`)  |
-| go         | gopls                  | delve    | goimports,gofumpt         |
-| `c/c++`    | clangd                 | cpptools | `clang_format`            |
-| markdown   | marksman,`prosemd_lsp` |          | prettierd                 |
-| sh         | shfmt                  |          |                           |
-| json       | jq,`jsonld_lsp`        |          | prettierd                 |
-| cmake      | cmake,                 |          | cmakelang(`cmake_format`) |
-| yaml       | yamlls                 |          | prettierd                 |
-| lua        | `lua_ls`               |          | stylua                    |
-| Dockerfile | dockerls               |          |                           |
-
-To enable the language server,like:
-
-```lua
-require'lspconfig'.ruff_lsp.setup{}
-```
+| Language   | LSP             | Debug    | Format                    |
+| ---------- | --------------- | -------- | ------------------------- |
+| python     | pyright         | debugpy  | isort,black,(`ruff_lsp`)  |
+| go         | gopls           | delve    | goimports,gofumpt         |
+| `c/c++`    | clangd          | cpptools | `clang_format`            |
+| markdown   | markdown_oxide  |          | prettierd                 |
+| sh         | shfmt           |          |                           |
+| json       | jq,`jsonld_lsp` |          | prettierd                 |
+| cmake      | cmake,          |          | cmakelang(`cmake_format`) |
+| yaml       | yamlls          |          | prettierd                 |
+| lua        | `lua_ls`        |          | stylua                    |
+| Dockerfile | dockerls        |          |                           |
 
 ## Snippets
 
@@ -462,25 +394,6 @@ custom snippets
 ## Alt Mappings
 
 Use `A` or `M`, like `<A-t>` ,`<M-up>`
-
-## Debug ArstroNvim with docker
-
-```bash
-# no proxy
-docker run --rm --network host  -it wqk/ubuntu20.04-astronvim:latest bash
-
-# with proxy
-docker run --rm --network host -e all_proxy=socks://127.0.0.1:7891/ -e http_proxy=http://127.0.0.1:7890/ -e https_proxy=http://127.0.0.1:7890/  -it wqk/ubuntu20.04-astronvim:latest bash
-
-```
-
-Add proxy in container
-
-```bash
-export all_proxy=socks://127.0.0.1:7891/
-export http_proxy=http://127.0.0.1:7890/
-export https_proxy=http://127.0.0.1:7890/
-```
 
 ## Execute nvim command in terminal
 
@@ -517,3 +430,10 @@ dos2unix filename
     :set noexpandtab
     :%retab!
     ```
+
+### Rime
+
+1. `;f` 启动中文输入法
+2. `;;` 停止输入法
+3. `;j` 退出插入模式
+4. `;u` undo

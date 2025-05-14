@@ -1,0 +1,54 @@
+{
+  "python": [
+    {
+      "trigger": "todo",
+      "name": "add TODO comment",
+      "description": "add TODO comment",
+      "body": [
+        "# TODO: $0"
+      ]
+    },
+    {
+      "trigger": "note",
+      "name": "add NOTE comment",
+      "description": "add NOTE comment",
+      "body": [
+        "# NOTE: $0"
+      ]
+    },
+    {
+      "trigger": "imop",
+      "name": "import open3d",
+      "description": "import open3d as o3d",
+      "body": [
+        "import open3d as o3d",
+        ""
+      ]
+    },
+    {
+      "trigger": "imnp",
+      "name": "import numpy",
+      "description": "import numpy as np",
+      "body": [
+        "import numpy as np",
+        ""
+      ]
+    },
+    {
+      "trigger": "o3r",
+      "name": "open3d read_point_cloud",
+      "description": "open3d read_point_cloud from a file",
+      "body": [
+        "${1:pcd} = o3d.io.read_point_cloud(${2:pcd_file})$0"
+      ]
+    },
+    {
+      "trigger": "o3w",
+      "name": "open3d write_point_cloud",
+      "description": "open3d write_point_cloud to a file",
+      "body": [
+        "o3d.io.write_point_cloud(${1:pcd_file}, ${2:pcd})$0"
+      ]
+    }
+  ]
+}

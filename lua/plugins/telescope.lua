@@ -1,25 +1,22 @@
 return {
   "nvim-telescope/telescope.nvim",
-  dependencies = { -- add a new dependency to telescope that is our new plugin
-    "ahmedkhalf/project.nvim",
+  dependencies = {
+    "nvim-lua/plenary.nvim",
     {
       "edolphin-ydf/goimpl.nvim",
       dependencies = { "nvim-lua/popup.nvim" },
       after = "telescope.nvim",
     },
-    -- {
-    --   "nvim-telescope/telescope-media-files.nvim",
-    --   dependencies = { "nvim-lua/popup.nvim" },
-    --   after = "telescope.nvim",
-    -- },
     {
       "nvim-telescope/telescope-live-grep-args.nvim",
       after = "telescope.nvim",
     },
   },
-  opts = function(_, opts)
+  config = function()
     local actions = require "telescope.actions"
-    return require("astrocore").extend_tbl(opts, {
+    local get_icon = require("astroui").get_icon
+    require("telescope").setup {
+
       defaults = {
         -- Default configuration for telescope goes here:
         -- config_key = value,
@@ -38,6 +35,22 @@ return {
             ["<C-p>"] = actions.cycle_history_prev,
             ["<C-n>"] = actions.cycle_history_next,
           },
+        },
+        prompt_prefix = string.format("%s ", get_icon "Search"),
+        selection_caret = string.format("%s ", get_icon "Selected"),
+        path_display = { "truncate" },
+        sorting_strategy = "ascending",
+        layout_config = {
+          horizontal = {
+            prompt_position = "top",
+            preview_width = 0.55,
+          },
+          vertical = {
+            mirror = false,
+          },
+          width = 0.87,
+          height = 0.80,
+          preview_cutoff = 120,
         },
       },
       pickers = {
@@ -127,18 +140,15 @@ return {
           end,
         },
       },
-    })
-  end,
-  config = function(_, opts)
-    -- run the core AstroNvim configuration function with the options table
-    require("configs").telescope_drop(_, opts)
-
-    -- require telescope and load extensions as necessary
-    local telescope = require "telescope"
-
-    -- telescope.load_extension "projects"
-    telescope.load_extension "goimpl"
-    telescope.load_extension "live_grep_args"
-    -- telescope.load_extension "media_files"
+      extensions = {
+        -- Your extension configuration goes here:
+        -- extension_name = {
+        --   extension_config_key = value,
+        -- }
+        -- please take a look at the readme of the extension you want to configure
+        goimpl = {},
+        live_grep_args = {},
+      },
+    }
   end,
 }

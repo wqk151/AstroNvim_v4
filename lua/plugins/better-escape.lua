@@ -6,11 +6,11 @@ return {
       default_mappings = false,
       mappings = {
         i = {
-          j = {
-            -- These can all also be functions
-            k = "<Esc>",
-            j = "<Esc>",
-          },
+          -- j = {
+          --   -- These can all also be functions
+          --   k = "<Esc>",
+          --   j = "<Esc>",
+          -- },
           k = {
             j = "<Esc>",
           },

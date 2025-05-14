@@ -77,6 +77,7 @@ vim.cmd [[
         call setline(10, "#define ".macro)
         call setline(11, "")
         call setline(12, "#endif  // ".macro)
+        execute "normal! 11G"
     endfunc
     ]]
 --     vim.cmd [[

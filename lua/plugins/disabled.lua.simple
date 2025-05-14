@@ -1,5 +1,5 @@
 return {
-  -- { "sindrets/diffview.nvim", enabled = false },
+  { "sindrets/diffview.nvim", enabled = false },
   { "hrsh7th/cmp-nvim-lsp-signature-help", enabled = false },
   { "erhickey/sig-window-nvim", enabled = false },
   { "p00f/clangd_extensions.nvim", enabled = false },
@@ -34,4 +34,7 @@ return {
   { "danymat/neogen", enabled = false },
   { "Civitasv/cmake-tools.nvim", enabled = false },
   { "renerocksai/telekasten.nvim", enabled = false },
+  { "TabbyML/vim-tabby", enabled = false },
+  { "yetone/avante.nvim", enabled = false },
+  { "luozhiya/fittencode.nvim", enabled = false },
 }

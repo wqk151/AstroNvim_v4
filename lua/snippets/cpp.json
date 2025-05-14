@@ -1,0 +1,54 @@
+{
+  "cpp": [
+    {
+      "trigger": "todo",
+      "name": "add TODO comment",
+      "description": "add TODO comment",
+      "body": ["// TODO: $0"]
+    },
+    {
+      "trigger": "note",
+      "name": "add NOTE comment",
+      "description": "add NOTE comment",
+      "body": ["// NOTE: $0"]
+    },
+    {
+      "trigger": "cla",
+      "name": "class definition",
+      "description": "simple class definition",
+      "body": ["class ${1:className} {", "public:", "\t$0", "};"]
+    },
+    {
+      "trigger": "include",
+      "name": "include standard library",
+      "description": "include iostream, vector, string",
+      "body": [
+        "#include <iostream>",
+        "#include <vector>",
+        "#include <string>",
+        "",
+        "using namespace std;",
+        "",
+        "$0"
+      ]
+    },
+    {
+      "trigger": "func",
+      "name": "function definition",
+      "description": "define function",
+      "body": ["${1:void} ${2:funcName}(${3}) {", "\t${4}", "}", "$0"]
+    },
+    {
+      "trigger": "funci",
+      "name": "function declaration",
+      "description": "declare function",
+      "body": ["${1:void} ${2:funcName}(${3});", "$0"]
+    },
+    {
+      "trigger": "endl",
+      "name": "endl",
+      "description": "<< std::endl",
+      "body": ["<< std::endl"]
+    }
+  ]
+}

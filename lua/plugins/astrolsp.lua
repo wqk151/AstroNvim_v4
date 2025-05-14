@@ -40,7 +40,7 @@ return {
     -- enable servers that you already have installed without mason
     servers = {
       -- "pyright"
-      "tabby_ml",
+      -- "tabby_ml",
     },
     -- customize language server configuration options passed to `lspconfig`
     ---@diagnostic disable: missing-fields
@@ -57,12 +57,6 @@ return {
           usePlaceholders = true,
           completeUnimported = true,
           semanticHighlighting = true,
-        },
-      },
-      tabby_ml = {
-        settings = {
-          cmd = { "tabby-agent", "--lsp", "--stdio" },
-          single_file_support = true,
         },
       },
       harper_ls = {
@@ -165,38 +159,11 @@ return {
     mappings = {
       n = {
         -- a `cond` key can provided as the string of a server capability to be required to attach, or a function with `client` and `bufnr` parameters from the `on_attach` that returns a boolean
-        gD = {
-          function() vim.lsp.buf.declaration() end,
-          desc = "Declaration of current symbol",
-          cond = "textDocument/declaration",
-        },
-        ["gy"] = {
-          function() require("telescope.builtin").lsp_type_definitions() end,
-          desc = "Definition of current type",
-        },
-        ["gd"] = {
-          function() require("telescope.builtin").lsp_definitions() end,
-          desc = "Show the definition of current symbol",
-        },
-        ["gI"] = {
-          function() require("telescope.builtin").lsp_implementations() end,
-          desc = "Implementation of current symbol",
-        },
-        ["gr"] = {
-          function() require("telescope.builtin").lsp_references() end,
-          desc = "References of current symbol",
-        },
-        ["<Leader>lR"] = {
-          function() require("telescope.builtin").lsp_references() end,
-          desc = "References of current symbol",
-        },
-        ["<Leader>uY"] = {
-          function() require("astrolsp.toggles").buffer_semantic_tokens() end,
-          desc = "Toggle LSP semantic highlight (buffer)",
-          cond = function(client)
-            return client.supports_method "textDocument/semanticTokens/full" and vim.lsp.semantic_tokens ~= nil
-          end,
-        },
+        ["gd"] = { function() require("snacks").picker.lsp_definitions() end, desc = "Goto Definition" },
+        ["gD"] = { function() require("snacks").picker.lsp_declarations() end, desc = "Goto Declaration" },
+        ["gr"] = { function() require("snacks").picker.lsp_references() end, nowait = true, desc = "References" },
+        ["gI"] = { function() require("snacks").picker.lsp_implementations() end, desc = "Goto Implementation" },
+        ["gy"] = { function() require("snacks").picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
         -- gitsigns
         ["<Leader>gp"] = { function() require("gitsigns").preview_hunk() end, desc = "Preview Git hunk" },
 
