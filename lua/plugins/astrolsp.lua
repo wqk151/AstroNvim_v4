@@ -59,6 +59,7 @@ return {
           semanticHighlighting = true,
         },
       },
+      markdown_oxide = { capabilities = { workspace = { didChangeWatchedFiles = { dynamicRegistration = true } } } },
       harper_ls = {
         settings = {
           ["harper-ls"] = {

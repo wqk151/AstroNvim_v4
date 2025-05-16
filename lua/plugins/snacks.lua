@@ -41,12 +41,16 @@ return -- lazy.nvim
           keys = {
             ["<S-Tab>"] = { "list_up", mode = { "i", "n" } },
             ["<Tab>"] = { "list_down", mode = { "i", "n" } },
+            ["<c-u>"] = { "preview_scroll_up", mode = { "i", "n" } },
+            ["<c-d>"] = { "preview_scroll_down", mode = { "i", "n" } },
           },
         },
         list = {
           keys = {
             ["<S-Tab>"] = { "list_up", mode = { "i", "n" } },
             ["<Tab>"] = { "list_down", mode = { "i", "n" } },
+            ["<c-u>"] = { "preview_scroll_up", mode = { "i", "n" } },
+            ["<c-d>"] = { "preview_scroll_down", mode = { "i", "n" } },
           },
         },
       },

@@ -149,11 +149,6 @@ return {
         ["<leader>mm"] = { "<cmd>RenderMarkdown toggle<cr>", desc = "Toggle markdown render" },
         ["<leader>mo"] = { "<cmd>MarkmapOpen<cr>", desc = "Open markmap" },
         ["<leader>mw"] = { "<cmd>MarkmapWatch<cr>", desc = "Open markmap and watch for changes" },
-        -- todo-comments
-        ["<leader>fT"] = {
-          function() require("snacks").picker.todo_comments { keywords = { "TODO", "FIX", "FIXME" } } end,
-          desc = "Todo/Fix/Fixme",
-        },
 
         -- remap <leader>ll to Search symbols
         -- ["<leader>ll"] = { function() require("telescope.builtin").lsp_document_symbols() end, desc = "Search symbols" },
@@ -174,18 +169,17 @@ return {
           desc = "Buffer Diagnostics (Trouble)",
         },
         ["<leader>xl"] = { "<cmd>Trouble loclist toggle<cr>", desc = "Location List (Trouble)" },
-        -- ["<leader>xq"] = { "<cmd>Trouble qflist toggle<cr>", desc = "Quickfix List (Trouble)" },
         ["<leader>xT"] = { "<cmd>TodoTrouble<cr>", desc = "TODOs (Trouble)" },
 
         -- terminal
         ["<leader>ti"] = {
-          function() require("snacks").terminal.toggle "ipython" end,
+          function() require("astrocore").toggle_term_cmd { cmd = "ipython" } end,
           desc = "ToggleTerm ipython",
         },
-        -- ["<leader>tj"] = {
-        --   function() configs.toggle_term_cmd "joshuto" end,
-        --   desc = "ToggleTerm ipython",
-        -- },
+        ["<leader>tj"] = {
+          function() require("astrocore").toggle_term_cmd { cmd = "yazi", direction = "float" } end,
+          desc = "ToggleTerm ipython",
+        },
       },
       v = {
         -- Reselect text after indent/unindent.

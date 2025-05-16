@@ -10,6 +10,7 @@ return {
   -- { "lilibyte/tabhula.nvim", enabled = false },
   -- { "phaazon/hop.nvim", enabled = false },
   { "OXY2DEV/markview.nvim", enabled = false },
+  { "smoka7/multicursors.nvim", enabled = false },
   -- { "3rd/image.nvim", enabled = false },
   -- { "MeanderingProgrammer/render-markdown.nvim", enabled = false },
   -- { "kylechui/nvim-surround", enabled = false },

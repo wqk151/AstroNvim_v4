@@ -13,8 +13,8 @@ return {
         -- nvim-cmp style menu
         draw = {
           columns = {
-            { "label", "label_description", gap = 1 },
-            { "kind_icon", "kind", "source_name" },
+            { "kind_icon", "kind" },
+            { "label", "source_name", gap = 1 },
           },
           components = {
             label = {
