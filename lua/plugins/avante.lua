@@ -1,16 +1,29 @@
+local prefix = "<Leader>A"
+---@type LazySpec
 return {
   "yetone/avante.nvim",
-  event = "VeryLazy",
-  lazy = false,
-  version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
+  -- enabled = false, -- test out CodeCompanion
+  build = "make",
+  event = "User AstroFile",
+  cmd = {
+    "AvanteAsk",
+    "AvanteBuild",
+    "AvanteEdit",
+    "AvanteRefresh",
+    "AvanteSwitchProvider",
+    "AvanteChat",
+    "AvanteToggle",
+    "AvanteClear",
+  },
+  dependencies = {
+    "nvim-lua/plenary.nvim",
+    "MunifTanjim/nui.nvim",
+    { "AstroNvim/astrocore", opts = function(_, opts) opts.mappings.n[prefix] = { desc = " Avante" } end },
+  },
   opts = {
-    -- add any opts here
-    -- for example
-    provider = "qianwen",
-    auto_suggestions_provider = "claude",
-    cursor_applying_provider = "qianwen", -- The provider used in the applying phase of Cursor Planning Mode, defaults to nil, when nil uses Config.provider as the provider for the applying phase
-
-    vendors = {
+    provider = "deepseek",
+    auto_suggestions_provider = "deepseek",
+    providers = {
       deepseek = {
         __inherited_from = "openai",
         api_key_name = "DEEPSEEK_API_KEY",
@@ -25,56 +38,76 @@ return {
         max_tokens = 8192,
       },
     },
-    behaviour = {
-      auto_suggestions = false, -- Experimental stage
-      auto_set_highlight_group = true,
-      auto_set_keymaps = true,
-      auto_apply_diff_after_generation = false,
-      support_paste_from_clipboard = false,
-      minimize_diff = true, -- Whether to remove unchanged lines when applying a code block
-      enable_token_counting = true, -- Whether to enable token counting. Default to true.
-      enable_cursor_planning_mode = true, -- Whether to enable Cursor Planning Mode. Default to false.
+    hints = { enabled = false },
+    mappings = {
+      ask = prefix .. "<CR>",
+      edit = prefix .. "e",
+      refresh = prefix .. "r",
+      focus = prefix .. "f",
+      stop = prefix .. "S",
+      toggle = {
+        default = prefix .. "t",
+        debug = prefix .. "d",
+        hint = prefix .. "h",
+        suggestion = prefix .. "s",
+        repomap = prefix .. "R",
+      },
+      diff = {
+        next = "]c",
+        prev = "[c",
+      },
+      files = {
+        add_current = prefix .. ".",
+        add_all_buffers = prefix .. "B",
+      },
+      select_model = prefix .. "m",
+      select_history = prefix .. "h",
+    },
+    windows = {
+      width = 45,
     },
   },
-  -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-  build = "make",
-  -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
-  dependencies = {
-    "nvim-treesitter/nvim-treesitter",
-    "stevearc/dressing.nvim",
-    "nvim-lua/plenary.nvim",
-    "MunifTanjim/nui.nvim",
-    --- The below dependencies are optional,
-    "echasnovski/mini.pick", -- for file_selector provider mini.pick
-    "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
-    "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
-    "ibhagwan/fzf-lua", -- for file_selector provider fzf
-    "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-    "zbirenbaum/copilot.lua", -- for providers='copilot'
+  specs = {
     {
-      -- support for image pasting
-      "HakonHarnes/img-clip.nvim",
-      event = "VeryLazy",
+      "Saghen/blink.cmp",
+      optional = true,
+      dependencies = { "yetone/avante.nvim" },
+      specs = { "Saghen/blink.compat", version = "*", lazy = true, opts = {} },
       opts = {
-        -- recommended settings
-        default = {
-          embed_image_as_base64 = false,
-          prompt_for_file_name = false,
-          drag_and_drop = {
-            insert_mode = true,
+        sources = {
+          per_filetype = {
+            AvanteInput = { "avante_commands", "avante_mentions", "avante_files" },
           },
-          -- required for Windows users
-          use_absolute_path = true,
+          providers = {
+            avante_commands = {
+              name = "avante_commands",
+              module = "blink.compat.source",
+              score_offset = 90, -- show at a higher priority than lsp
+              opts = {},
+            },
+            avante_files = {
+              name = "avante_commands",
+              module = "blink.compat.source",
+              score_offset = 100, -- show at a higher priority than lsp
+              opts = {},
+            },
+            avante_mentions = {
+              name = "avante_mentions",
+              module = "blink.compat.source",
+              score_offset = 1000, -- show at a higher priority than lsp
+              opts = {},
+            },
+          },
         },
       },
     },
     {
-      -- Make sure to set this up properly if you have lazy=true
       "MeanderingProgrammer/render-markdown.nvim",
-      opts = {
-        file_types = { "markdown", "Avante" },
-      },
-      ft = { "markdown", "Avante" },
+      optional = true,
+      opts = function(_, opts)
+        if not opts.file_types then opts.file_types = { "markdown" } end
+        opts.file_types = require("astrocore").list_insert_unique(opts.file_types, { "Avante" })
+      end,
     },
   },
 }

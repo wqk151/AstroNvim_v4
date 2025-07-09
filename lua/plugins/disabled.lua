@@ -34,7 +34,7 @@ return {
   { "Exafunction/codeium.nvim", enabled = false },
   { "yetone/avante.nvim", enabled = false },
   { "voldikss/vim-translator", enabled = false },
-  -- { "liubianshi/cmp-lsp-rimels", enabled = false },
+  { "liubianshi/cmp-lsp-rimels", enabled = false },
   -- { "mei28/blink-bang-word-light.nvim", enabled = false },
   -- { "hrsh7th/nvim-cmp", enabled = false },
 }

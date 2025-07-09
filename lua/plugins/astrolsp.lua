@@ -90,7 +90,7 @@ return {
           gopls = {
             templateExtensions = { "tpl", "yaml" },
             experimentalPostfixCompletions = true,
-            gofumpt = true,
+            -- gofumpt = true,
             usePlaceholders = true,
             analyses = {
               shadow = true,
@@ -101,15 +101,15 @@ return {
               useany = true,
               unreachable = true,
             },
-            hints = {
-              assignVariableTypes = true,
-              compositeLiteralFields = true,
-              compositeLiteralTypes = true,
-              constantValues = true,
-              functionTypeParameters = true,
-              parameterNames = true,
-              rangeVariableTypes = true,
-            },
+            -- hints = {
+            --   assignVariableTypes = true,
+            --   compositeLiteralFields = true,
+            --   compositeLiteralTypes = true,
+            --   constantValues = true,
+            --   functionTypeParameters = true,
+            --   parameterNames = true,
+            --   rangeVariableTypes = true,
+            -- },
           },
         },
       },

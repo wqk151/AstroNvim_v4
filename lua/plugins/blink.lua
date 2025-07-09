@@ -32,6 +32,9 @@ return {
       -- Display a preview of the selected item on the current line
       ghost_text = { enabled = true, show_with_selection = true },
     },
+    cmdline = {
+      enabled = false,
+    },
     sources = {
       providers = {
         lsp = {

@@ -9,6 +9,8 @@ local sections = {
   m = { desc = " Markdown" },
   n = { desc = "󰞋 Noegen" },
   r = { desc = " Run" },
+  s = { desc = " InterestingWord" },
+  j = { desc = "⚡Flash" },
 }
 
 ---@type LazySpec
@@ -60,6 +62,8 @@ return {
       -- first key is the mode
       n = {
         -- second key is the lefthand side of the map
+        ["<leader>s"] = sections.s,
+        ["<leader>j"] = sections.j,
 
         -- navigate buffer tabs
         ["]b"] = { function() require("astrocore.buffer").nav(vim.v.count1) end, desc = "Next buffer" },

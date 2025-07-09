@@ -30,7 +30,7 @@ return -- lazy.nvim
         max_height = 20,
       },
     },
-    scroll = { enabled = true },
+    scroll = { enabled = false },
     picker = {
       -- your picker configuration comes here
       -- or leave it empty to use the default settings
@@ -51,6 +51,23 @@ return -- lazy.nvim
             ["<Tab>"] = { "list_down", mode = { "i", "n" } },
             ["<c-u>"] = { "preview_scroll_up", mode = { "i", "n" } },
             ["<c-d>"] = { "preview_scroll_down", mode = { "i", "n" } },
+          },
+        },
+      },
+      sources = {
+        files = {
+          hidden = true,
+          ignored = true,
+          exclude = {
+            "node_modules",
+            "build",
+            "devel",
+            "logs",
+            "cmake_build",
+            ".DS_Store",
+            ".git",
+            ".yarn/cache",
+            ".cache",
           },
         },
       },

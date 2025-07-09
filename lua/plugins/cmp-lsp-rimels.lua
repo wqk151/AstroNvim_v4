@@ -1,7 +1,6 @@
 return {
   "liubianshi/cmp-lsp-rimels",
   branch = "blink.cmp",
-  keys = { { ",f", mode = "i" } },
   config = function()
     vim.system({ "rime_ls", "--listen", "127.0.0.1:9257" }, { detach = true })
     require("rimels").setup {
