@@ -193,9 +193,9 @@ return {
         ["<leader>y"] = { '"+y', desc = "copy to register" },
         [",t"] = { "<cmd>TranslateVisual<cr>", desc = "Translate selected text" },
         -- fittencode
-        ["<leader>ad"] = { "<cmd>Fitten document_code<CR>", desc = "Fitten document code" },
-        ["<leader>ae"] = { "<cmd>Fitten edit_code<CR>", desc = "Fitten edit code" },
-        ["<leader>af"] = { "<cmd>Fitten find_bugs<CR>", desc = "Fitten find bugs" },
+        -- ["<leader>ad"] = { "<cmd>Fitten document_code<CR>", desc = "Fitten document code" },
+        -- ["<leader>ae"] = { "<cmd>Fitten edit_code<CR>", desc = "Fitten edit code" },
+        -- ["<leader>af"] = { "<cmd>Fitten find_bugs<CR>", desc = "Fitten find bugs" },
       },
       i = {
         -- 编辑完成后跳出括号

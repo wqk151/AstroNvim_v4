@@ -31,6 +31,7 @@ return {
   -- { "rebelot/heirline.nvim", enabled = false },
   { "TabbyML/vim-tabby", enabled = false },
   -- { "luozhiya/fittencode.nvim", enabled = false },
+  { "Kurama622/llm.nvim", enabled = false },
   { "Exafunction/codeium.nvim", enabled = false },
   { "yetone/avante.nvim", enabled = false },
   { "voldikss/vim-translator", enabled = false },

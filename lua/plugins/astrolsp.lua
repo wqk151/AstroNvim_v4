@@ -172,6 +172,7 @@ return {
           function() require("telescope-live-grep-args.shortcuts").grep_word_under_cursor_current_buffer() end,
           desc = "Find word under cursor in current buffer",
         },
+        ["<Leader>la"] = { function() require("actions-preview").code_actions() end, desc = "Preview Git hunk" },
       },
     },
     -- A custom `on_attach` function to be run after the default `on_attach` function
