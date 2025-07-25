@@ -112,6 +112,9 @@ return {
 
         ["<leader>p"] = { '"+p', desc = "paste from register" },
 
+        -- telescope
+        ["<leader>f/"] = { "<cmd>Telescope current_buffer_fuzzy_find<CR>", desc = "Search in current buffer" },
+
         -- Hop
         ["<leader>jl"] = { "<cmd>HopLine<cr>", desc = "Line" },
         ["<leader>jw"] = { "<cmd>HopWord<cr>", desc = "Word" },
