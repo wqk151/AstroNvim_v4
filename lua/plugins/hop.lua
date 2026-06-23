@@ -1,12 +1,7 @@
 return {
-  "phaazon/hop.nvim",
-  cmd = {
-    "HopChar1",
-    "HopChar2",
-    "HopLine",
-    "HopPattern",
-    "HopWord",
+  "smoka7/hop.nvim",
+  version = "*",
+  opts = {
+    keys = "etovxqpdygfblzhckisuran",
   },
-  branch = "v2",
-  opts = {},
 }

@@ -1,5 +1,6 @@
 return {
   "saghen/blink.cmp",
+  dependencies = { "saghen/blink.compat", "Kurama622/llm.nvim" },
   opts = {
     completion = {
       -- 示例：使用'prefix'对于'foo_|_bar'单词将匹配'foo_'(光标前面的部分),使用'full'将匹配'foo__bar'(整个单词)
@@ -36,7 +37,16 @@ return {
       enabled = false,
     },
     sources = {
+      -- 在默认补全源基础上加入 llm，实现 AI 自动补全
+      default = { "lsp", "path", "snippets", "buffer", "llm" },
       providers = {
+        llm = {
+          name = "LLM",
+          module = "llm.common.completion.frontends.blink",
+          timeout_ms = 10000,
+          score_offset = 100,
+          async = true,
+        },
         lsp = {
           enabled = true,
           transform_items = function(_, items)

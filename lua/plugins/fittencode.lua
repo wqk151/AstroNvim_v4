@@ -39,7 +39,8 @@ return {
       use_default_keymaps = false,
       keymaps = {
         inline = {
-          ["<C-i>"] = "accept_all_suggestions",
+          -- ["<C-i>"] = "accept_all_suggestions",
+          ["<A-i>"] = "accept_all_suggestions", -- for windows terminal
           ["<C-y>"] = "accept_line",
           -- ["<C-Right>"] = "accept_word",
           ["<C-e>"] = "revoke_line",
