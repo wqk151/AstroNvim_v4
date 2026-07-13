@@ -2,6 +2,7 @@ local prefix = "<Leader>A"
 ---@type LazySpec
 return {
   "yetone/avante.nvim",
+  -- commit = "0222885dff8ff17def0a78ccdeaf02c32230a55a",
   -- enabled = false, -- test out CodeCompanion
   build = "make",
   event = "User AstroFile",
@@ -18,7 +19,7 @@ return {
   dependencies = {
     "nvim-lua/plenary.nvim",
     "MunifTanjim/nui.nvim",
-    { "AstroNvim/astrocore", opts = function(_, opts) opts.mappings.n[prefix] = { desc = " Avante" } end },
+    { "AstroNvim/astrocore", opts = function(_, opts) opts.mappings.n[prefix] = { desc = "󰭻 Avante" } end },
   },
   opts = {
     provider = "deepseek",
@@ -28,7 +29,7 @@ return {
         __inherited_from = "openai",
         api_key_name = "DEEPSEEK_API_KEY",
         endpoint = "https://api.deepseek.com",
-        model = "deepseek-coder",
+        model = "deepseek-v4-flash",
       },
       qianwen = {
         __inherited_from = "openai",
@@ -69,7 +70,7 @@ return {
   },
   specs = {
     {
-      "Saghen/blink.cmp",
+      "saghen/blink.cmp",
       optional = true,
       dependencies = { "yetone/avante.nvim" },
       specs = { "Saghen/blink.compat", version = "*", lazy = true, opts = {} },

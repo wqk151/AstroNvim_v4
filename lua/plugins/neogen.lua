@@ -1,13 +1,36 @@
+local prefix = "<Leader>a"
+---@type LazySpec
 return {
   "danymat/neogen",
-  dependencies = "nvim-treesitter/nvim-treesitter",
-  config = function()
-    require("neogen").setup {
-      enabled = true,
-      snippet_engine = "luasnip",
-      languages = {
-        python = { template = { annotation_convention = "google_docstrings" } },
+  cmd = "Neogen",
+  opts = {
+    languages = {
+      python = { template = { annotation_convention = "google_docstrings" } },
+      lua = { template = { annotation_convention = "emmylua" } },
+      typescript = { template = { annotation_convention = "tsdoc" } },
+      typescriptreact = { template = { annotation_convention = "tsdoc" } },
+    },
+  },
+  specs = {
+    {
+      "AstroNvim/astrocore",
+      opts = {
+        mappings = {
+          n = {
+            [prefix] = { desc = "󰏫 Annotate" },
+            [prefix .. "<CR>"] = { function() require("neogen").generate() end, desc = "Current" },
+            [prefix .. "c"] = { function() require("neogen").generate { type = "class" } end, desc = "Class" },
+            [prefix .. "f"] = { function() require("neogen").generate { type = "func" } end, desc = "Function" },
+            [prefix .. "t"] = { function() require("neogen").generate { type = "type" } end, desc = "Type" },
+            [prefix .. "F"] = { function() require("neogen").generate { type = "file" } end, desc = "File" },
+          },
+        },
       },
-    }
-  end,
+    },
+    {
+      "L3MON4D3/LuaSnip",
+      optional = true,
+      specs = { "danymat/neogen", opts = { snippet_engine = "luasnip" } },
+    },
+  },
 }

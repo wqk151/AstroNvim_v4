@@ -1,4 +1,4 @@
-# AstroNvim config v5
+# AstroNvim config v6
 
 ## AstroNvim repository
 
@@ -25,10 +25,10 @@ git clone https://github.com/wqk151/AstroNvim_v4.git ~/.config/nvim
 
 ## Environment
 
-- neovim: v0.10.1
+- neovim: v0.11.1
 - node: v18.15.0
 - python3: 3.10
-- golang: go1.22
+- golang: go1.24
 
 ## Dependencies
 
@@ -332,17 +332,13 @@ chagen: cs
 ### Easy move
 
 1. `folke/flash.nvim`
-2. move line `Alt +[j|k|h|l]`
+2. ~~move line `Alt +[j|k|h|l]`~~
 3. `g*`, `g#`, Use `n` and `N` to navigate.
 
    - `*` searches forward for the word under the cursor
    - `#` searches backward for the word under the cursor
 
-4. highlight the word under the cursor
-   user `n` and `N` to navigate
-   - search key: <Leader + s>
-   - color key: <Leader + k>
-5. hop `<Leader + jw>` support chinese characters
+4. hop `<Leader + jw>` support chinese characters
 
 ### Go Command
 

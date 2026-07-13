@@ -2,52 +2,135 @@
 return {
   "olimorris/codecompanion.nvim",
   event = "User AstroFile",
-  enabled = false, -- test out Avante
   cmd = {
     "CodeCompanion",
     "CodeCompanionActions",
     "CodeCompanionChat",
     "CodeCompanionCmd",
   },
-  dependencies = { "nvim-lua/plenary.nvim", "nvim-treesitter/nvim-treesitter" },
+  dependencies = {
+    "nvim-lua/plenary.nvim",
+    "nvim-treesitter/nvim-treesitter",
+    "j-hui/fidget.nvim",
+    "ravitemer/codecompanion-history.nvim", -- history extension
+  },
+  init = function() require("plugins.fidget-spinner"):init() end,
   opts = {
+    opts = {
+      language = "Chinese",
+    },
     display = {
       chat = {
-        start_in_insert_mode = true,
-        window = {
-          opts = {
-            number = false,
-            relativenumber = false,
+        auto_scroll = true,
+        show_settings = true, -- Show LLM settings at the top of the chat buffer?
+        start_in_insert_mode = true, -- Open the chat buffer in insert mode?
+      },
+    },
+    interactions = {
+      chat = {
+        adapter = {
+          name = "deepseek",
+          model = "deepseek-v4-flash",
+        },
+        roles = {
+          user = "",
+        },
+        keymaps = {
+          send = {
+            modes = {
+              i = { "<C-s>" },
+            },
           },
         },
       },
-    },
-    strategies = {
-      chat = {
-        adapter = "glados",
-      },
       inline = {
-        adapter = "glados",
+        adapter = {
+          name = "deepseek",
+          model = "deepseek-v4-flash",
+        },
+      },
+      shared = {
+        keymaps = {
+          accept_change = {
+            modes = { n = "ga" },
+            description = "Accept the suggested change",
+          },
+          reject_change = {
+            modes = { n = "gr" },
+            opts = { nowait = true },
+            description = "Reject the suggested change",
+          },
+          next_hunk = {
+            callback = "keymaps.next_hunk",
+            modes = { n = "<]]>" },
+          },
+          previous_hunk = {
+            callback = "keymaps.previous_hunk",
+            modes = { n = "<[[>" },
+          },
+        },
       },
       cmd = {
-        adapter = "glados",
+        adapter = {
+          name = "deepseek",
+          model = "deepseek-v4-flash",
+        },
       },
     },
-    adapters = {
-      opts = { show_defaults = false },
-      glados = function()
-        return require("codecompanion.adapters").extend("openai", {
-          name = "deepseek",
-          formatted_name = "DeepSeek",
-          url = "https://api.deepseek.com",
-          env = { api_key = "DEEPSEEK_API_KEY" },
-          schema = {
-            model = {
-              default = "deepseek-coder",
-            },
-          },
-        })
-      end,
+    mcp = {
+      servers = {
+        ["memory"] = {
+          cmd = { "npx", "-y", "@modelcontextprotocol/server-memory" },
+        },
+        ["sequential-thinking"] = {
+          cmd = { "npx", "-y", "@modelcontextprotocol/server-sequential-thinking" },
+        },
+        -- ["tavily-mcp"] = {
+        --   cmd = { "npx", "-y", "tavily-mcp@latest" },
+        --   env = {
+        --     TAVILY_API_KEY = "cmd:op read op://personal/Tavily_API/credential --no-newline",
+        --   },
+        --   tool_defaults = {
+        --     require_approval_before = true,
+        --   },
+        -- },
+      },
+      opts = {
+        -- The opts.default_servers option controls which MCP servers are automatically started
+        -- with their tools added to the chat buffer.
+        default_servers = { "sequential-thinking" },
+      },
+    },
+    rules = {
+      personal = {
+        description = "Collection of common files for all projects",
+        {
+          path = "~/.config/nvim/lua/rules",
+          files = "*.md",
+        },
+      },
+      opts = {
+        chat = {
+          autoload = { "default", "personal" }, -- The rule groups to load
+          enabled = true,
+        },
+      },
+    },
+    prompt_library = {
+      markdown = {
+        dirs = {
+          vim.fn.getcwd() .. "/.prompts",
+          "~/.config/nvim/lua/prompts",
+        },
+      },
+    },
+    extensions = {
+      history = {
+        enabled = true, -- defaults to true
+        opts = {
+          dir_to_save = vim.fn.stdpath "data" .. "/codecompanion_chats.json",
+        },
+      },
     },
   },
   specs = {
@@ -55,16 +138,21 @@ return {
       "AstroNvim/astrocore",
       opts = function(_, opts)
         local prefix = "<Leader>A"
-        opts.mappings.n[prefix] = { desc = " AI" }
-        opts.mappings.v[prefix] = { desc = " AI" }
-        opts.mappings.n[prefix .. "<CR>"] = { function() vim.cmd.CodeCompanionChat "Toggle" end, desc = "AI Chat" }
-        opts.mappings.v[prefix .. "<CR>"] = { function() vim.cmd.CodeCompanionChat "Add" end, desc = "Add to AI Chat" }
-        opts.mappings.n[prefix .. "A"] = { function() vim.cmd.CodeCompanionActions() end, desc = "AI Actions" }
-        opts.mappings.v[prefix .. "A"] = { function() vim.cmd.CodeCompanionActions() end, desc = "AI Actions" }
+        opts.mappings.n[prefix] = { desc = "󰭻 AI" }
+        opts.mappings.v[prefix] = { desc = "󰭻 AI" }
+        opts.mappings.n[prefix .. "c"] = { "<cmd>CodeCompanionChat Toggle<cr>", desc = "Toggle chat" }
+        opts.mappings.v[prefix .. "c"] = { "<cmd>CodeCompanionChat Toggle<cr>", desc = "Toggle chat" }
+        opts.mappings.n[prefix .. "p"] = { "<cmd>CodeCompanionActions<cr>", desc = "Open action palette" }
+        opts.mappings.v[prefix .. "p"] = { "<cmd>CodeCompanionActions<cr>", desc = "Open action palette" }
+        opts.mappings.n[prefix .. "i"] = { "<cmd>CodeCompanion<cr>", desc = "Open inline assistant" }
+        opts.mappings.v[prefix .. "i"] = { "<cmd>CodeCompanion<cr>", desc = "Open inline assistant" }
+        opts.mappings.n[prefix .. "h"] = { "<cmd>CodeCompanionHistory<cr>", desc = "Open the history browser" }
+        opts.mappings.n[prefix .. "s"] = { "<cmd>CodeCompanionSummaries<cr>", desc = " Browse all summaries" }
+        opts.mappings.v[prefix .. "a"] = { "<cmd>CodeCompanionChat Add<cr>", desc = "Add selection to chat" }
       end,
     },
     {
-      "Saghen/blink.cmp",
+      "saghen/blink.cmp",
       optional = true,
       dependencies = { "olimorris/codecompanion.nvim" },
       opts = {

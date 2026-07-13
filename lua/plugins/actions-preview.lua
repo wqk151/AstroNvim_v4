@@ -1,4 +1,6 @@
 return {
   "aznhe21/actions-preview.nvim",
-  config = function() end,
+  opts = {
+    backend = { "snacks" },
+  },
 }

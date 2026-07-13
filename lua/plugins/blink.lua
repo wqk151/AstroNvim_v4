@@ -38,15 +38,8 @@ return {
     },
     sources = {
       -- 在默认补全源基础上加入 llm，实现 AI 自动补全
-      default = { "lsp", "path", "snippets", "buffer", "llm" },
+      default = { "lsp", "path", "snippets", "buffer" },
       providers = {
-        llm = {
-          name = "LLM",
-          module = "llm.common.completion.frontends.blink",
-          timeout_ms = 10000,
-          score_offset = 100,
-          async = true,
-        },
         lsp = {
           enabled = true,
           transform_items = function(_, items)

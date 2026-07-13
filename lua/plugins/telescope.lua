@@ -12,10 +12,10 @@ return {
       after = "telescope.nvim",
     },
   },
-  config = function()
+  opts = function()
     local actions = require "telescope.actions"
     local get_icon = require("astroui").get_icon
-    require("telescope").setup {
+    return {
 
       defaults = {
         -- Default configuration for telescope goes here:
@@ -151,4 +151,21 @@ return {
       },
     }
   end,
+  specs = {
+    {
+      "AstroNvim/astrocore",
+      opts = {
+        mappings = {
+          n = {
+            ["<leader>f/"] = { "<cmd>Telescope current_buffer_fuzzy_find<CR>", desc = "Search in current buffer" },
+            ["<leader>fi"] = { "<cmd>Telescope goimpl<CR>", desc = "Search GoImpl" },
+            ["<leader>fC"] = {
+              function() require("telescope-live-grep-args.shortcuts").grep_word_under_cursor_current_buffer() end,
+              desc = "Find word under cursor in current buffer",
+            },
+          },
+        },
+      },
+    },
+  },
 }

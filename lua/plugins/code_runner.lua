@@ -1,3 +1,4 @@
+local prefix = "<Leader>r"
 return {
   "CRAG666/code_runner.nvim",
   cmd = {
@@ -18,6 +19,20 @@ return {
       sh = "time bash $file",
       go = "time cd $dir && go run .",
       markdown = "cd $dir && typora $fileName",
+    },
+  },
+  specs = {
+    {
+      "AstroNvim/astrocore",
+      opts = {
+        mappings = {
+          n = {
+            [prefix] = { name = " Run" },
+            [prefix .. "r"] = { "<cmd>RunCode<cr>", desc = "Run Code file" },
+            [prefix .. "b"] = { "<cmd>MdEval<cr>", desc = "Run C++ Code block in Markdown" },
+          },
+        },
+      },
     },
   },
 }
