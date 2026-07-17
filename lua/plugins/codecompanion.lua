@@ -22,14 +22,14 @@ return {
     display = {
       chat = {
         auto_scroll = true,
-        show_settings = true, -- Show LLM settings at the top of the chat buffer?
+        -- show_settings = true, -- Show LLM settings at the top of the chat buffer?, can not change adapter when set true
         start_in_insert_mode = true, -- Open the chat buffer in insert mode?
       },
     },
     interactions = {
       chat = {
         adapter = {
-          name = "deepseek",
+          name = "claude_code",
           model = "deepseek-v4-flash",
         },
         roles = {
@@ -60,20 +60,36 @@ return {
             opts = { nowait = true },
             description = "Reject the suggested change",
           },
-          next_hunk = {
-            callback = "keymaps.next_hunk",
-            modes = { n = "<]]>" },
-          },
-          previous_hunk = {
-            callback = "keymaps.previous_hunk",
-            modes = { n = "<[[>" },
-          },
         },
       },
       cmd = {
         adapter = {
           name = "deepseek",
           model = "deepseek-v4-flash",
+        },
+      },
+    },
+    adapters = {
+      http = {
+        extend = {
+          anthropic = { env = { api_key = "cmd:op read op://personal/Anthropic_API/credential --no-newline" } },
+          gemini = { env = { api_key = "cmd:op read op://personal/Gemini_API/credential --no-newline" } },
+          openai = { env = { api_key = "cmd:op read op://personal/OpenAI_API/credential --no-newline" } },
+        },
+      },
+      acp = {
+        extend = {
+          claude_code = {
+            defaults = { mcpServers = "inherit_from_config" },
+            -- env = { CLAUDE_CODE_OAUTH_TOKEN = "cmd:op read op://personal/Claude_Code_OAuth/credential --no-newline" },
+          },
+          codex = {
+            env = { OPENAI_API_KEY = "cmd:op read op://personal/OpenAI_API/credential --no-newline" },
+          },
+          gemini_cli = {
+            defaults = { auth_method = "gemini-api-key" },
+            env = { GEMINI_API_KEY = "cmd:op read op://personal/Gemini_API/credential --no-newline" },
+          },
         },
       },
     },

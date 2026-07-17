@@ -34,6 +34,7 @@ return {
   { "luozhiya/fittencode.nvim", enabled = false },
   -- { "olimorris/codecompanion.nvim", enabled = false },
   -- { "Kurama622/llm.nvim", enabled = false },
+  { "folke/sidekick.nvim", enabled = false },
   { "Exafunction/codeium.nvim", enabled = false },
   { "yetone/avante.nvim", enabled = false },
   { "milanglacier/minuet-ai.nvim", enabled = false },
