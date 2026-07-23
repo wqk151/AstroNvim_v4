@@ -423,25 +423,25 @@ You must:
     }
   end,
   specs = {
-    {
-      "AstroNvim/astrocore",
-      opts = function(_, opts)
-        local prefix = "<Leader>A"
-        opts.mappings.n[prefix] = { desc = "󰭻 AI" }
-        opts.mappings.v[prefix] = { desc = "󰭻 AI" }
-        opts.mappings.x[prefix] = { desc = "󰭻 AI" }
-        -- opts.mappings.n[prefix .. "c"] = { "<cmd>LLMSessionToggle<cr>", desc = "Toggle chat" }
-        opts.mappings.n[prefix .. "g"] = { "<cmd>LLMAppHandler CommitMsg<cr>", desc = "Generate commit message" }
-        opts.mappings.n[prefix .. "t"] = { "<cmd>LLMAppHandler Translate<cr>", desc = "AI Translate" }
-        -- opts.mappings.n[prefix .. "k"] = { "<cmd>LLMAppHandler Ask<cr>", desc = "Ask llm" }
-        -- opts.mappings.n[prefix .. "a"] = { "<cmd>LLMAppHandler AttachToChat<cr>", desc = "Ask (multi-turn)" }
-        opts.mappings.x[prefix .. "w"] = { "<cmd>LLMAppHandler WordTranslate<cr>", desc = "Woord translation" }
-        -- opts.mappings.v[prefix .. "e"] = { "<cmd>LLMAppHandler CodeExplain<cr>", desc = "Explain selected code" }
-        opts.mappings.v[prefix .. "d"] = { "<cmd>LLMAppHandler Docstring<cr>", desc = "Generate docstring" }
-        -- opts.mappings.v[prefix .. "k"] = { "<cmd>LLMAppHandler Ask<cr>", desc = "Ask llm" }
-        -- opts.mappings.v[prefix .. "a"] = { "<cmd>LLMAppHandler AttachToChat<cr>", desc = "Ask (multi-turn)" }
-      end,
-    },
+    -- {
+    --   "AstroNvim/astrocore",
+    --   opts = function(_, opts)
+    --     local prefix = "<Leader>A"
+    --     opts.mappings.n[prefix] = { desc = "󰭻 AI" }
+    --     opts.mappings.v[prefix] = { desc = "󰭻 AI" }
+    --     opts.mappings.x[prefix] = { desc = "󰭻 AI" }
+    --     -- opts.mappings.n[prefix .. "c"] = { "<cmd>LLMSessionToggle<cr>", desc = "Toggle chat" }
+    --     -- opts.mappings.n[prefix .. "g"] = { "<cmd>LLMAppHandler CommitMsg<cr>", desc = "Generate commit message" }
+    --     -- opts.mappings.n[prefix .. "t"] = { "<cmd>LLMAppHandler Translate<cr>", desc = "AI Translate" }
+    --     -- opts.mappings.n[prefix .. "k"] = { "<cmd>LLMAppHandler Ask<cr>", desc = "Ask llm" }
+    --     -- opts.mappings.n[prefix .. "a"] = { "<cmd>LLMAppHandler AttachToChat<cr>", desc = "Ask (multi-turn)" }
+    --     -- opts.mappings.x[prefix .. "w"] = { "<cmd>LLMAppHandler WordTranslate<cr>", desc = "Woord translation" }
+    --     -- opts.mappings.v[prefix .. "e"] = { "<cmd>LLMAppHandler CodeExplain<cr>", desc = "Explain selected code" }
+    --     -- opts.mappings.v[prefix .. "d"] = { "<cmd>LLMAppHandler Docstring<cr>", desc = "Generate docstring" }
+    --     -- opts.mappings.v[prefix .. "k"] = { "<cmd>LLMAppHandler Ask<cr>", desc = "Ask llm" }
+    --     -- opts.mappings.v[prefix .. "a"] = { "<cmd>LLMAppHandler AttachToChat<cr>", desc = "Ask (multi-turn)" }
+    --   end,
+    -- },
     {
       "saghen/blink.cmp",
       optional = true,

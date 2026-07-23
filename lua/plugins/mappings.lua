@@ -52,10 +52,6 @@ return {
           -- setting a mapping to false will disable it
           -- ["<C-S>"] = false,
           -- disable Terminal bindings
-          ["grr"] = false,
-          ["gra"] = false,
-          ["grn"] = false,
-          ["gri"] = false,
           ["<C-Q>"] = false,
           ["<C-S>"] = false,
           ["<Leader>n"] = false,
@@ -110,6 +106,9 @@ return {
       mappings = {
         n = {
           ["<leader>la"] = { function() require("actions-preview").code_actions() end, desc = "Preview Code Actions" },
+          ["grr"] = { function() Snacks.picker.lsp_references() end, desc = "References" },
+          ["grt"] = { function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
+          ["gri"] = { function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
         },
       },
     },

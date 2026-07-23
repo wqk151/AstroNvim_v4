@@ -2,7 +2,7 @@ local prefix = "<Leader>A"
 return {
   "folke/sidekick.nvim",
   ---@type sidekick.Config
-  opts = {},
+  opts = { nes = { enabled = false } },
   specs = {
     {
       "AstroNvim/astrocore",
@@ -19,9 +19,13 @@ return {
         mappings = {
           n = {
             [prefix] = { desc = "󰭻 AI" },
-            [prefix .. "a"] = {
+            [prefix .. "A"] = {
               function() require("sidekick.cli").toggle { filter = { installed = true } } end,
               desc = "Toggle AI CLI",
+            },
+            [prefix .. "c"] = {
+              function() require("sidekick.cli").toggle { name = "claude", focus = true } end,
+              desc = "Toggle Claude",
             },
             [prefix .. "o"] = {
               function() require("sidekick.cli").focus() end,
@@ -79,13 +83,13 @@ return {
               function() require("sidekick.cli").prompt() end,
               desc = "Send Prompt to AI CLI",
             },
-            [prefix .. "a"] = {
+            [prefix .. "A"] = {
               function() require("sidekick.cli").toggle { filter = { installed = true } } end,
               desc = "Toggle AI CLI",
             },
           },
           t = {
-            [prefix .. "a"] = {
+            [prefix .. "A"] = {
               function() require("sidekick.cli").toggle { filter = { installed = true } } end,
               desc = "Toggle AI CLI",
             },
@@ -108,10 +112,6 @@ return {
               expr = true,
               desc = "Accept inline completion",
             },
-            [prefix .. "a"] = {
-              function() require("sidekick.cli").toggle { filter = { installed = true } } end,
-              desc = "Toggle AI CLI",
-            },
           },
         },
       },
@@ -124,10 +124,10 @@ return {
         handlers = { copilot = false },
       },
     },
-    {
-      "WhoIsSethDaniel/mason-tool-installer.nvim",
-      opts = { ensure_installed = { "copilot-language-server" } },
-    },
+    -- {
+    --   "WhoIsSethDaniel/mason-tool-installer.nvim",
+    --   opts = { ensure_installed = { "copilot-language-server" } },
+    -- },
     -- {
     --   "neovim/nvim-lspconfig",
     --   config = function() vim.lsp.enable "copilot" end,
