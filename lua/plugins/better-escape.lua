@@ -28,7 +28,7 @@ return {
       },
       v = {
         j = {
-          k = "<Esc>",
+          k = false,
         },
       },
       s = {

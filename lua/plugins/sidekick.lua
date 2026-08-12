@@ -36,7 +36,7 @@ return {
               desc = "Detach AI CLI",
             },
             [prefix .. "s"] = {
-              function() require("sidekick.cli").select { filter = { intalled = true } } end,
+              function() require("sidekick.cli").select { filter = { installed = true } } end,
               desc = "Select an AI CLI",
             },
             [prefix .. "t"] = {
@@ -50,10 +50,6 @@ return {
             [prefix .. "p"] = {
               function() require("sidekick.cli").prompt() end,
               desc = "Send Prompt to AI CLI",
-            },
-            [prefix .. "c"] = {
-              function() require("sidekick.cli").toggle { name = "claude", focus = true } end,
-              desc = "Toggle Claude",
             },
             [prefix .. "l"] = {
               function()
@@ -100,18 +96,18 @@ return {
           },
 
           i = {
-            [prefix .. "o"] = {
-              function() require("sidekick.cli").focus() end,
-              desc = "Focus",
-            },
-            ["<A-a>"] = {
-              function()
-                if vim.lsp.inline_completion and vim.lsp.inline_completion.get() then return end
-                return "<A-a>"
-              end,
-              expr = true,
-              desc = "Accept inline completion",
-            },
+            -- [prefix .. "o"] = {
+            --   function() require("sidekick.cli").focus() end,
+            --   desc = "Focus",
+            -- },
+            -- ["<A-a>"] = {
+            --   function()
+            --     if vim.lsp.inline_completion and vim.lsp.inline_completion.get() then return end
+            --     return "<A-a>"
+            --   end,
+            --   expr = true,
+            --   desc = "Accept inline completion",
+            -- },
           },
         },
       },
